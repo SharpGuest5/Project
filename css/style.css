@@ -1,0 +1,131 @@
+@charset "utf-8";
+
+* {
+    margin:0;
+    padding:0;
+}
+
+body {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    height: 100vh;                 
+    background:url(/image/background.jpg) no-repeat;      
+    background-size:cover;          
+}
+
+.box {
+    border-radius:40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+    height: 760px;
+    border-top: 2px solid rgba(255,255,255,0.5);
+    border-bottom: 2px solid rgba(255,255,255,0.5);
+    border-left: 2px solid rgba(255,255,255,0.2);
+    border-right: 2px solid rgba(255,255,255,0.2);
+    backdrop-filter:blur(20px);
+    background:rgba(50,50,50,0.2);
+}
+
+.box .input-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    margin-bottom:20px;
+ }
+
+.box .input-box > label {
+    margin-bottom:10px;
+    color:rgba(255,255,255,0.9);
+    font-size:26px;
+}
+
+.box > h1 {
+    color:rgba(255,255,255,0.9);
+    margin-bottom:40px;
+}
+.box .input-box > input {
+    box-sizing:border-box;
+    color: rgba(255,255,255,0.9);
+    font-size: 28px;
+    height:70px;
+    width:500px;
+    background:rgba(255,255,255,0.3);
+    border:2px solid rgba(255,255,255,0.5);
+    border-radius:10px;
+    transition:0.2s;
+    outline:none;
+    padding: 0 20px;
+    letter-spacing:2px;
+}
+
+.box .input-box > input:focus {
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.box .btn-box {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+}
+
+.box .btn-box > a {
+    font-size:28px;
+    text-decoration: none;
+    color:rgba(255,255,255,0.9);
+    transition:0.2s;
+    width:500px;
+    text-align:end;
+}
+
+.box .btn-box > a:hover{
+    text-decoration: none;
+    color: rgba(255,255,255,1);
+}
+
+.box .btn-box > div {
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:start;
+    margin-top: 40px;
+}
+
+.box .btn-box > div > button {
+    width: 240px;
+    height: 70px;
+    border: 2px solid rgba(197,81,58,0.8);
+    background: rgba(197,81,58,0.5);
+    color: rgba(255,255,255,0.9);
+    border-radius: 10px;
+}
+
+.box .btn-box > div > button {
+    width: 240px;
+    height: 70px;
+    border: 2px solid rgba(197,81,58,0.8);
+    background: rgba(197,81,58,0.5);
+    color: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    transition:0.2s;
+}
+
+.box .btn-box > div > button:nth-of-type(2){
+    margin-left:20px;
+}
+
+.box .btn-box > div > button:hover {
+    border: 2px solid rgba(248,108,76,0.8);
+    background: rgba(248,108,76,0.5);
+}
+
+.button {
+    font-size: 18px;
+}

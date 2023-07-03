@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Login Menu", ".", "{CDCD6933-F94D-4EBB-9830-C2A53DD17F53}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_57871"
+		Debug.AspNetCompiler.PhysicalPath = "..\Login Menu\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57871\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_57871"
+		Release.AspNetCompiler.PhysicalPath = "..\Login Menu\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57871\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "57871"
+		SlnRelativePath = "..\Login Menu\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CDCD6933-F94D-4EBB-9830-C2A53DD17F53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDCD6933-F94D-4EBB-9830-C2A53DD17F53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B8DFB8B0-6A0B-4FAE-B6BC-E2A9666C443C}
+	EndGlobalSection
+EndGlobal
