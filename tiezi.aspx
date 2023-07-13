@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="tiezi.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="tiezi.aspx.cs" Inherits="Tiezi" %>
 
 
 <!DOCTYPE html>
@@ -8,6 +8,41 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
      <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
     <title>帖子</title>
+    <style>
+        .*{
+            margin:0;
+            padding:0;
+            text-decoration:none;
+            list-style:none;
+            
+        }
+    ul {
+        line-height: 1.5; /* 设置行间距 */
+        text-align: right; /* 设置右对齐 */
+        margin: 0 auto; /* 设置居中对齐 */
+        width: 300px; /* 设置容器宽度，根据需要进行调整 */
+    }
+
+    li {
+       
+    }
+         .header {
+        width: 98%;
+        height: 50px;
+        background-color: rgb(170, 241, 234);
+        padding-top: 5px;
+        text-align: right;
+        line-height: 36px;
+    }
+         .form1{
+             background:url(./image/Z30_1150.jpg);
+             background-size:cover;
+         }
+         body {
+             background:url(/image/Z30_1150.jpg) no-repeat;
+             background-size:cover;
+         }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -25,7 +60,7 @@
       
                  
                  <div class="about" style="width:stretch"><template>
-    <div calss="container">
+    <div class="container">
         <el-header>
             <i class="el-icon-s-unfold" @click="visible = true"></i>
             <h2 style="display: inline-block;margin-left: 20px" id="h2Username" runat="server">未登录</h2>
@@ -68,7 +103,7 @@
              </div>
           <div style="width:auto; height:260px;">
               
-             <a href="grzy.aspx"><el-button round>帖子管理</el-button></div></a> 
+             <a href="grzy.aspx"><el-button round>帖子管理</el-button></a></div> 
                 </div>
             </el-drawer>
            
@@ -119,9 +154,9 @@
                 
             </div>
             </div> 
-                    <div style="width:1000px; height:900px; float:left;background-color:white)">
-                        <div style="width:100px; border:1px solid #000000; border-radius:4px;"><p style="text-align: center;" id="title"> 标题</p ></div>
-                           <div style="width:100px; border:1px solid #000000; border-radius:4px;"><p style="text-align: center;" id="text">正文</p ></div>
+                    <div style="width:1000px; height:900px; float:left;background-color:white">
+                        <div style="width:100px; border:1px solid #000000; border-radius:4px;"><td style="text-align: center;" id="title" runat="server"></td></div>
+                           <div style="width:100px; border:1px solid #000000; border-radius:4px;"><td style="text-align: center;" id="text" runat="server"></td></div>
                         <div></div>
                              <div><asp:TextBox style="width:800px; height:300px;" ID="TextBox3" runat="server" TextMode="MultiLine" ></asp:TextBox></div>
                     <div>
@@ -151,42 +186,4 @@
         }
     })
 </script>
-    <style>
-        .*{
-            margin:0;
-            padding:0;
-            text-decoration:none;
-            list-style:none;
-            
-        }
-        <style>
-    ul {
-        line-height: 1.5; /* 设置行间距 */
-        text-align: right; /* 设置右对齐 */
-        margin: 0 auto; /* 设置居中对齐 */
-        width: 300px; /* 设置容器宽度，根据需要进行调整 */
-    }
-
-    li {
-       
-    }
-       </style>
-    <style>
-         .header {
-        width: 98%;
-        height: 50px;
-        background-color: rgb(170, 241, 234);
-        padding-top: 5px;
-        text-align: right;
-        line-height: 36px;
-    }
-         .form1{
-             background:url(./image/Z30_1150.jpg);
-             background-size:cover;
-         }
-         body {
-             background:url(/image/Z30_1150.jpg) no-repeat;
-             background-size:cover;
-         }
-    </style>
 </html>

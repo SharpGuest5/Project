@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,6 +12,11 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        GridView1.RowCommand += GridView1_RowCommand;
+        if (!IsPostBack)
+        {
+            GridView1.DataBind();
+        }
         GridView1.DataBind();
         HtmlTableCell usernameControl = FindControl("username") as HtmlTableCell;
         HtmlTableCell sexControl = FindControl("sex") as HtmlTableCell;
@@ -59,18 +65,18 @@ public partial class _Default : System.Web.UI.Page
         GridView1.DataBind();
     }
 
-    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            Label lblId = e.Row.FindControl("lblId") as Label;
-            if (lblId != null)
-            {
-                string id = lblId.Text;
-                // 在这里处理id值
-            }
-        }
-    }
+    ////protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    ////{
+    ////    if (e.Row.RowType == DataControlRowType.DataRow)
+    ////    {
+    ////        Label lblId = e.Row.FindControl("lblId") as Label;
+    ////        if (lblId != null)
+    ////        {
+    ////            string id = lblId.Text;
+    ////            // 在这里处理id值              
+    ////        }
+    ////    }
+    ////}
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -81,11 +87,42 @@ public partial class _Default : System.Web.UI.Page
             if (lblId != null)
             {
                 string id = lblId.Text;
-                // 在这里处理id值
+                // 在这里处理id值               
             }
         }
     }
 
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+            if (e.CommandName == "ViewDetails")
+            {
+            string id = e.CommandArgument.ToString();
+            string conStr = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=bbs;Data Source=Rain";
+            OleDbConnection con = new OleDbConnection(conStr);
+            con.Open();
+            string log = "SELECT [title],[text] FROM threadinfo WHERE id = ?";
+            OleDbCommand cmd = new OleDbCommand(log, con);
+            cmd.Parameters.AddWithValue("?", id);
+            OleDbDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                string titleSession = reader["title"].ToString();
+                string textSession = reader["text"].ToString();
+                Session["titleSession"] = titleSession;
+                Session["textSession"] = textSession;
+                con.Close();
+                Response.Redirect("~/tiezi.aspx?id=" + id);
+            }
+            }          
+                          
+    }
 
-
+    protected void lnkDetails_Click(object sender, EventArgs e)
+    {
+        LinkButton lnkDetails = (LinkButton)sender;
+        GridViewRow row = (GridViewRow)lnkDetails.NamingContainer;
+        Label lblId = (Label)row.FindControl("lblId");
+        string id = lblId.Text;
+        // 执行您的操作，例如将id存储在Session中或重定向到tiezi.aspx页面
+    }
 }

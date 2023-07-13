@@ -161,14 +161,18 @@
                   <div class="biao">
                  <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
     <ContentTemplate>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" Height="349px" Width="1026px" PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" AllowSorting="True" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal" Height="349px" Width="1026px" PageSize="10" OnPageIndexChanging="GridView1_PageIndexChanging" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand">
     <Columns>
         <asp:TemplateField Visible="False">
             <ItemTemplate>
                 <asp:Label ID="lblId" runat="server" Text='<%# Eval("id") %>'></asp:Label>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:HyperLinkField Text="帖子详细" DataNavigateUrlFields="id" DataNavigateUrlFormatString="~/tiezi.aspx?id={0}" />
+        <asp:TemplateField>
+    <ItemTemplate>
+        <asp:LinkButton ID="lnkDetails" runat="server" CommandName="ViewDetails" CommandArgument='<%# Eval("id") %>' Text="帖子详细" OnClick="lnkDetails_Click" />
+    </ItemTemplate>
+     </asp:TemplateField>
         <asp:BoundField DataField="title" HeaderText="title" SortExpression="title" />
         <asp:BoundField DataField="type" HeaderText="type" SortExpression="type" />
         <asp:BoundField DataField="provider" HeaderText="provider" SortExpression="provider" />
