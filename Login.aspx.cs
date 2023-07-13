@@ -7,66 +7,63 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
+using System.Web.UI.HtmlControls;
 
 public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
     }
-    protected void btn_lg_click(object sender, EventArgs e)
+    public void Btn_lg_click(object sender, EventArgs e)
     {
         string username = txtBox1.Text;
         string password = txtBox2.Text;
         if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-        { 
-            Response.Write("未填写用户名或密码！");
+        {
+            var errorMessage = (HtmlGenericControl)FindControl("errorMessage");
+            errorMessage.InnerHtml = "未填写用户名或密码<br />请检查";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showFailurePopup", "document.getElementById('failurePopup').style.display = 'block'; document.getElementById('mask').style.display = 'block';", true);
             return;
         }
-        string conStr = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Shopping_System;Data Source=MOBA-6-PLUS";
+        string conStr = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=bbs;Data Source=Rain";
         OleDbConnection con = new OleDbConnection(conStr);
         con.Open();
-        string log = "SELECT COUNT(*) FROM [user] WHERE username = ? AND password = ?";
+        string log = "SELECT COUNT(*) FROM userinfo WHERE username = ? AND password = ?";
         OleDbCommand cmd = new OleDbCommand(log,con);
         cmd.Parameters.AddWithValue("?", username);
         cmd.Parameters.AddWithValue("?", password);
         int count = (int)cmd.ExecuteScalar();
         if(count > 0)
-        { 
-            Response.Write("登录成功！"); 
+        {
+            string pass = "SELECT sex, age, email FROM userinfo WHERE username = ?";
+            OleDbCommand find = new OleDbCommand(pass,con);
+            find.Parameters.AddWithValue("?", username);
+            OleDbDataReader reader = find.ExecuteReader();
+            if(reader.Read())
+            {
+                string sexSession = reader["sex"].ToString();
+                string ageSession = reader["age"].ToString();
+                string emailSession = reader["email"].ToString();
+                Session["sexSession"] = sexSession;
+                Session["ageSession"] = ageSession;
+                Session["emailSession"] = emailSession;
+            }
+            //string script = "setTimeout(function() { window.location.href = 'NEPUBBS.aspx'; }, 5000);";
+            //var errorMessage = (HtmlGenericControl)FindControl("errorMessage");
+            //errorMessage.InnerHtml = "登录成功！<br />5秒后自动跳转";
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "showFailurePopup", "document.getElementById('failurePopup').style.display = 'block'; document.getElementById('mask').style.display = 'block';", true);
+            Session["Username"] = username;
+            //ClientScript.RegisterStartupScript(this.GetType(), "redirectScript", script, true);
+            Response.Redirect("~/NEPUBBS.aspx");
         }
         else
-        { 
-            Response.Write("账号或密码错误");
+        {
+            var errorMessage = (HtmlGenericControl)FindControl("errorMessage");
+            errorMessage.InnerHtml = "登录失败<br />请检查您的账号和密码";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "showFailurePopup", "document.getElementById('failurePopup').style.display = 'block'; document.getElementById('mask').style.display = 'block';", true);
         }
         con.Close();
     }
     
-    protected void btn_reg_click(object sender, EventArgs e)
-    {
-        string username = txtBox1.Text;
-        string password = txtBox2.Text;
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-        {
-            Response.Write("未填写用户名或密码！");
-            return;
-        }
-        string conStr = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Shopping_System;Data Source=MOBA-6-PLUS";
-        OleDbConnection con = new OleDbConnection(conStr);
-        con.Open();
-        string exist = "SELECT COUNT(*) FROM [user] WHERE username = ?";
-        OleDbCommand cmd = new OleDbCommand(exist, con);
-        cmd.Parameters.AddWithValue("?", username);
-        int count = (int)cmd.ExecuteScalar();
-        if (count > 0)
-        { Response.Write("用户已存在，注册失败"); }
-        else
-        {
-            string sql = "insert into [user](username,password) values ('" + txtBox1.Text + "','" + txtBox2.Text + "')";
-            OleDbCommand reg = new OleDbCommand(sql, con);
-            reg.ExecuteNonQuery();
-            Response.Write("注册成功！");
-        }
-        con.Close();
-    }
 }

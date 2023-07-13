@@ -1,17 +1,19 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="_Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="_Default" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>登录</title>
+    <title>注册</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
     <link rel="icon" href="image/icon.ico" />
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <style>
         * {
     margin:0;
     padding:0;
-}
+          }
 
 body {
     display: flex; 
@@ -30,7 +32,7 @@ body {
     justify-content: center;
     align-items: center;
     width: 700px;
-    height: 700px;
+    height: 1200px;
     border-top: 2px solid rgba(255,255,255,0.5);
     border-bottom: 2px solid rgba(255,255,255,0.5);
     border-left: 2px solid rgba(255,255,255,0.2);
@@ -40,7 +42,7 @@ body {
 }
 
 .box .input-box {
-    display: inline;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: start;
@@ -99,7 +101,7 @@ body {
     text-decoration: none;
     color:rgba(255,255,255,0.9);
     transition:0.2s;
-    width:760px;
+    width:500px;
     text-align:end;
 }
 
@@ -117,7 +119,7 @@ body {
 }
 
 .box .btn-box > div > button {
-    width: 470px;
+    width: 720px;
     height: 70px;
     border: 2px solid rgba(197,81,58,0.8);
     background: rgba(197,81,58,0.5);
@@ -126,7 +128,7 @@ body {
 }
 
 .box .btn-box > div > button {
-    width: 470px;
+    width: 500px;
     height: 70px;
     border: 2px solid rgba(197,81,58,0.8);
     background: rgba(197,81,58,0.5);
@@ -148,83 +150,79 @@ body {
     font-size: 18px;
 }
 
-.box .check-box {
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    margin-bottom: 20px;
-    float: left;
-    width:100%;
+.check-box-container {
+    display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    background:rgba(50,50,50,1);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    display: none;
-    color:aliceblue;
-    height:140px;
-    width:400px;
-    font-size:30px;
-    text-align:center;
-    }
+.box .check-box-container .check-box input[type=checkbox] {
+        display:none;
+}
 
-.popup button{
-    width: 120px;
-    height: 40px;
-    border: 2px solid rgba(197,81,58,0.8);
-    background: rgba(197,81,58,0.5);
-    color: rgba(255,255,255,0.9);
-    border-radius: 10px;
-    transition:0.2s;
-    margin-top:20px;
-    float:right;
-    font-size:20px;
+.check-box-container label {
+    margin-right:10px;
+}
+
+.check-box-container input[type="checkbox"] + label {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+.check-box-container input[type="checkbox"] + label:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.check-box-container input[type="checkbox"]:checked + label:before {
+  background-color: rgba(255,255,255,0.3);
+  border-color: #000000;
 }
     </style>
 </head>
 <body>
     <form runat="server" id="main">
-    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-    <ContentTemplate>
-        <!-- 在这里放置您希望部分更新的内容 -->
-        <div id="failurePopup" class="popup">
-        <p id="errormessage" runat="server">登录成功！<br /> <span id="countdown">5</span> 秒后自动跳转</p>
-        <button id="closeButton">确认</button>
-        </div>
-        <!-- 其他控件和内容 -->
-            <div class="box">
-        <h1 style="font-size:50px">Login</h1>
+    <div class="box">
+        <h1 style="font-size:50px">注册</h1>
           <div class="input-box">
-            <asp:Label runat="server" CssClass="input-box" Font-Size="X-Large">账号</asp:Label>
+            <asp:Label runat="server" CssClass="input-box" Font-Size="X-Large">用户名*</asp:Label>
             <asp:TextBox runat="server" ID="txtBox1"></asp:TextBox>
           </div>
           <div class="input-box">
-            <asp:Label runat="server" CssClass="input-box" Font-Size="X-Large">密码</asp:Label>
+            <asp:Label runat="server" CssClass="input-box" Font-Size="X-Large">密码*</asp:Label>
             <asp:TextBox runat="server" TextMode="Password" ID="txtBox2"></asp:TextBox>
           </div>
+        <div class="check-box-container">
+            <div class="check-box">
+            <h2>&nbsp;&nbsp;性别*</h2>
+            <input type="checkbox" runat="server" id="sexCheckbox1" name="sexCheckbox1"/>
+                <label for="sexCheckbox1">男</label>
+            <input type="checkbox" runat="server" id="sexCheckbox2" name="sexCheckbox2"/>
+                <label for="sexCheckbox2">女</label>
+            </div>
+          </div>
+        <div class="input-box">
+            <asp:Label runat="server" CssClass="input-box" Font-Size="X-Large">年龄*</asp:Label>
+            <asp:TextBox runat="server" ID="txtBox4"></asp:TextBox>
+          </div>
+        <div class="input-box">
+            <asp:Label runat="server" CssClass="input-box" Font-Size="X-Large">邮箱</asp:Label>
+            <asp:TextBox runat="server" ID="txtBox5"></asp:TextBox>
+          </div>
         <div class="btn-box">
-                            <a href="Register.aspx">没有账号？点我注册</a>
             <div class="btn-box"> 
-                    <button id="lg_btn" type="button" class="button" runat="server" onserverclick="Btn_lg_click">登录</button>
+                    <button id="reg_btn" type="button" class="button" runat="server" onserverclick="Btn_reg_click">注册</button>
             </div>
         </div>
     </div>
-    </ContentTemplate>
-</asp:UpdatePanel>
     </form>
-        <script>
-            document.getElementById('closeButton').addEventListener('click', function () {
-                document.getElementById('failurePopup').style.display = 'none';
-            });
-        </script>
 </body>
 </html>
