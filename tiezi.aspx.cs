@@ -63,4 +63,21 @@ public partial class Tiezi : Page
             Response.Redirect("~/Login.aspx");
         }
     }
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        string time = DateTime.Now.ToLocalTime().ToString();
+        string provider = Session["Username"].ToString();
+        string tieziid = Session["tieziid"].ToString();
+        string conStr = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=bbs;Data Source=Rain";
+        OleDbConnection con = new OleDbConnection(conStr);
+        con.Open();
+        string upload = string.Format("INSERT INTO threadinfo (title, text, provider, uploadtime, type, father) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", "0", TextBox3.Text, provider, time, "1", tieziid);
+        OleDbCommand cmd = new OleDbCommand(upload, con);
+        cmd.ExecuteNonQuery();
+        con.Close();
+        var errorMessage = (HtmlGenericControl)FindControl("errorMessage");
+        errorMessage.InnerHtml = "评论成功！";
+        ScriptManager.RegisterStartupScript(this, this.GetType(), "showFailurePopup", "document.getElementById('failurePopup').style.display = 'block'; document.getElementById('mask').style.display = 'block';", true);
+    }
 }

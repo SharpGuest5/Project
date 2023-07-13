@@ -110,6 +110,7 @@ public partial class _Default : System.Web.UI.Page
                 string textSession = reader["text"].ToString();
                 Session["titleSession"] = titleSession;
                 Session["textSession"] = textSession;
+                Session["tieziid"] = id;
                 con.Close();
                 Response.Redirect("~/tiezi.aspx?id=" + id);
             }

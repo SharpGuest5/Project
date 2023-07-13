@@ -42,10 +42,49 @@
              background:url(/image/Z30_1150.jpg) no-repeat;
              background-size:cover;
          }
+
+         .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background:rgba(50,50,50,1);
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: none;
+    color:aliceblue;
+    height:140px;
+    width:400px;
+    font-size:30px;
+    text-align:center;
+    }
+
+.popup button{
+    width: 120px;
+    height: 40px;
+    border: 2px solid rgba(197,81,58,0.8);
+    background: rgba(197,81,58,0.5);
+    color: rgba(255,255,255,0.9);
+    border-radius: 10px;
+    transition:0.2s;
+    margin-top:20px;
+    float:right;
+    font-size:20px;
+}
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+         <ContentTemplate>
+        <!-- 在这里放置您希望部分更新的内容 -->
+        <div id="failurePopup" class="popup">
+        <p id="errormessage" runat="server">登录成功！<br /> <span id="countdown">5</span> 秒后自动跳转</p>
+        <button id="closeButton">确认</button>
+        </div>
         <center>
         <div style="width:1500px;text-align:center;">
             <div style="height:150px; width: 867px;">
@@ -157,10 +196,10 @@
                     <div style="width:1000px; height:900px; float:left;background-color:white">
                         <div style="width:100px; border:1px solid #000000; border-radius:4px;"><td style="text-align: center;" id="title" runat="server"></td></div>
                            <div style="width:100px; border:1px solid #000000; border-radius:4px;"><td style="text-align: center;" id="text" runat="server"></td></div>
-                        <div></div>
+                        <div><asp:GridView runat="server"></asp:GridView></div>
                              <div><asp:TextBox style="width:800px; height:300px;" ID="TextBox3" runat="server" TextMode="MultiLine" ></asp:TextBox></div>
                     <div>
-                        <asp:Button ID="Button1" runat="server" Text="评论" /></div>
+                        <asp:Button ID="Button1" runat="server" Text="评论" OnClick="Button1_Click" OnClientClick="return ShowAlert();" /></div>
 
             </div>
             </div>
@@ -170,7 +209,8 @@
         <div style="height:120px;"></div>
 
         </center>
-       
+           </ContentTemplate>
+           </asp:UpdatePanel>
     </form>
        
 </body>
@@ -185,5 +225,10 @@
             return { visible: false }
         }
     })
+</script>
+<script>
+    document.getElementById('closeButton').addEventListener('click', function () {
+        document.getElementById('failurePopup').style.display = 'none';
+    });
 </script>
 </html>

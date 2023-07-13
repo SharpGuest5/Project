@@ -70,12 +70,13 @@ public partial class tiezi : System.Web.UI.Page
 
     protected void upload(object sender, EventArgs e)
     {
+        string father = Session["tieziid"].ToString();
         string time = DateTime.Now.ToLocalTime().ToString();
         string provider = Session["Username"].ToString();
         string conStr = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=bbs;Data Source=Rain";
         OleDbConnection con = new OleDbConnection(conStr);
         con.Open();
-        string upload = string.Format("INSERT INTO threadinfo (title, text, provider, uploadtime, type, father) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", TextBox1.Text, TextBox3.Text, provider, time, DropDownList1.SelectedValue, "0");
+        string upload = string.Format("INSERT INTO threadinfo (title, text, provider, uploadtime, type, father) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", TextBox1.Text, TextBox3.Text, provider, time, "0", father);
         OleDbCommand cmd = new OleDbCommand(upload, con);
         cmd.ExecuteNonQuery();
         Response.Write("发帖成功！");
