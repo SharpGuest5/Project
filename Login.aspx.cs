@@ -13,7 +13,7 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        Session.Clear();
     }
     public void Btn_lg_click(object sender, EventArgs e)
     {

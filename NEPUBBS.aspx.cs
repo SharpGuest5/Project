@@ -12,6 +12,15 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["Login"] != null)
+        {
+            if (Session["Username"] == null)
+            {
+                var errorMessage = (HtmlGenericControl)FindControl("errorMessage");
+                errorMessage.InnerHtml = "您似乎未登录<br />请登录后再发帖";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "showFailurePopup", "document.getElementById('failurePopup').style.display = 'block'; document.getElementById('mask').style.display = 'block';", true);
+            }
+        }
         GridView1.RowCommand += GridView1_RowCommand;
         if (!IsPostBack)
         {
@@ -34,7 +43,7 @@ public partial class _Default : System.Web.UI.Page
                 ageControl.InnerText = age;
                 emailControl.InnerText = email;
                 // 用户已登录，设置按钮文本为"注销"
-                btnLog.Text = "注销";
+                btn.Text = "注销";
                 string username = Session["Username"].ToString();
                 usernameControl.InnerText = username;
                 h2Username.InnerText = username;
@@ -42,19 +51,19 @@ public partial class _Default : System.Web.UI.Page
             else
             {
                 // 用户未登录，设置按钮文本为"登录"
-                btnLog.Text = "登录";
+                btn.Text = "登录";
             }
         }
     }
    
     protected void Unnamed_ServerClick(object sender, EventArgs e)
     {
-        if (btnLog.Text=="注销")
+        if (btn.Text=="注销")
         {
             Session.Remove("Username");
             Response.Redirect("~/NEPUBBS.aspx");
         }
-        if (btnLog.Text=="登录")
+        if (btn.Text=="登录")
         {
             Response.Redirect("~/Login.aspx");
         }
@@ -125,5 +134,10 @@ public partial class _Default : System.Web.UI.Page
         Label lblId = (Label)row.FindControl("lblId");
         string id = lblId.Text;
         // 执行您的操作，例如将id存储在Session中或重定向到tiezi.aspx页面
+    }
+
+    protected void closeButton_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Login.aspx");
     }
 }

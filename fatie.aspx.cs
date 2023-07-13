@@ -11,6 +11,11 @@ public partial class tiezi : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["Username"] == null)
+        {
+            Session["Login"] = "未登录";
+            Response.Redirect("~/NEPUBBS.aspx");
+        }
         HtmlTableCell usernameControl = FindControl("username") as HtmlTableCell;
         HtmlTableCell sexControl = FindControl("sex") as HtmlTableCell;
         HtmlTableCell ageControl = FindControl("age") as HtmlTableCell;
@@ -76,7 +81,7 @@ public partial class tiezi : System.Web.UI.Page
         string conStr = "Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=bbs;Data Source=Rain";
         OleDbConnection con = new OleDbConnection(conStr);
         con.Open();
-        string upload = string.Format("INSERT INTO threadinfo (title, text, provider, uploadtime, type, father) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", TextBox1.Text, TextBox3.Text, provider, time, "0", father);
+        string upload = string.Format("INSERT INTO threadinfo (title, text, provider, uploadtime, type, father) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')", TextBox1.Text, TextBox3.Text, provider, time, "1", father);
         OleDbCommand cmd = new OleDbCommand(upload, con);
         cmd.ExecuteNonQuery();
         Response.Write("发帖成功！");
