@@ -15,7 +15,12 @@ public partial class Tiezi : Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-            HtmlTableCell titleControl = FindControl("title") as HtmlTableCell;
+        if (Session["tieziid"] != null)
+        {
+            string tieziid = Session["tieziid"].ToString();
+            SqlDataSource1.SelectCommand += " WHERE father = '" + tieziid + "' ";
+        }
+        HtmlTableCell titleControl = FindControl("title") as HtmlTableCell;
             HtmlTableCell textControl = FindControl("text") as HtmlTableCell;
             string title = Session["titleSession"].ToString();
             string text = Session["textSession"].ToString();

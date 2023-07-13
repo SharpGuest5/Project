@@ -6,103 +6,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"/>
-    <title>帖子</title>
-    <style>
-        .*{
-            margin:0;
-            padding:0;
-            text-decoration:none;
-            list-style:none;
-            
-        }
-    ul {
-        line-height: 1.5; /* 设置行间距 */
-        text-align: right; /* 设置右对齐 */
-        margin: 0 auto; /* 设置居中对齐 */
-        width: 300px; /* 设置容器宽度，根据需要进行调整 */
-    }
-
-    li {
-       
-    }
-         .header {
-        width: 98%;
-        height: 50px;
-        background-color: rgb(170, 241, 234);
-        padding-top: 5px;
-        text-align: right;
-        line-height: 36px;
-    }
-         .form1{
-             background:url(./image/Z30_1150.jpg);
-             background-size:cover;
-         }
-         body {
-             background:url(/image/Z30_1150.jpg) no-repeat;
-             background-size:cover;
-         }
-
-         .popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999;
-    background:rgba(50,50,50,1);
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    display: none;
-    color:aliceblue;
-    height:140px;
-    width:400px;
-    font-size:30px;
-    text-align:center;
-    }
-
-.popup button{
-    width: 120px;
-    height: 40px;
-    border: 2px solid rgba(197,81,58,0.8);
-    background: rgba(197,81,58,0.5);
-    color: rgba(255,255,255,0.9);
-    border-radius: 10px;
-    transition:0.2s;
-    margin-top:20px;
-    float:right;
-    font-size:20px;
-}
-    </style>
+    
+    <title></title>
+ <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
-    <form id="form1" runat="server">
-                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-         <ContentTemplate>
-        <!-- 在这里放置您希望部分更新的内容 -->
-        <div id="failurePopup" class="popup">
-        <p id="errormessage" runat="server">登录成功！<br /> <span id="countdown">5</span> 秒后自动跳转</p>
-        <button id="closeButton">确认</button>
-        </div>
-        <center>
-        <div style="width:1500px;text-align:center;">
-            <div style="height:150px; width: 867px;">
-                <img src="image/5acdb6ee61ce0718710573cad8b9d5c.png" style="width:1480px; margin-left: 0px;  display: block; /* 将图片设置为块级元素 */
-  margin: 0 auto 0 0px; height: 148px;text-align:center;" />
+    <form runat="server">
+  <div id="app">
+    <div class="parent">
+<div class="div1"><img src="image/trianglify-lowres.png"/> 
+    
 </div>
-            <div class="right_table" style="width:300px; height:900px; float:left;background-color:rgb(167, 234, 234)">
-               
-                
-          <div class="fatie" ><a href="NEPUBBS.aspx"><el-button round>返回首页</el-button></a></div>
-
-      
-                 
-                 <div class="about" style="width:stretch"><template>
-    <div class="container">
+        <div class="body"><div class="div2">
+        <%--    发帖按钮--%>
+    <div class="fati"><a href="NEPUBBS.aspx"><el-button type="primary" icon="el-icon-s-promotion">返回首页</el-button></a></div>
+    <div class="about">
         <el-header>
             <i class="el-icon-s-unfold" @click="visible = true"></i>
-            <h2 style="display: inline-block;margin-left: 20px" id="h2Username" runat="server">未登录</h2>
+            <h2 style="display: inline-block;margin-left: 20px" id="h2Username" runat="server">未登录</h2><%--未登录显示--%>
         </el-header>
         <el-main>
             <el-drawer
@@ -112,14 +33,14 @@
                     style="position: absolute"
                     direction="ltr"
                   
-            > <div>
-                    <div style="width:100%; height:40px"> <span>主页</span>
+            >  <div class="cht" style=" background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);">
+                    <div style="width:100%; height:40px"> <span style="text-align: center;display:block;">主页</span>
                        </div>
                      <div style="width:100%; height:60px"> 
-                        <span>欢迎使用NEPUBBS</span></div>
+                        <span style="text-align: center;display:block;">欢迎使用NEPUBBS</span></div>
                <div style="width:100%; height:520px;">     <table style="width: 100%;text-align: center; border-collapse: separate;
         border-spacing: 0 16px;">
-                           <tr>
+                         <tr>
                              <td>用户名：</td>
                              <td id="username" runat="server"></td>
                             
@@ -140,9 +61,11 @@
                          </tr>
                      </table>
              </div>
-          <div style="width:auto; height:260px;">
+          <div style="display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */" class="auto-style3">
               
-             <a href="grzy.aspx"><el-button round>帖子管理</el-button></a></div> 
+             <a href="grzy.aspx"><el-button round>帖子管理</el-button></div></a> 
                 </div>
             </el-drawer>
            
@@ -167,68 +90,151 @@
         }
     }
 </script>
-<style>
-    .el-header {
-        color: #333;
-        padding: 0 !important;
-        height: 50px!important;
-        background: antiquewhite;
-    }
- 
-    .el-main {
-        height: 100%;
-        padding: 0!important;
-        overflow: hidden;
-        position: relative;
-    }
-</style></div>
-            </div>
-            </div>
+    </div>
 
-            <div style="width:90%;height:900px;background-color:white">
-                <div id="postlist">
-        <div class="header">
-            <div class="not-login">
-                <asp:Button ID="btnLog" runat="server" CssClass="el-button" OnClick="Unnamed_ServerClick" />  
-                
-            </div>
-            </div> 
-                    <div style="width:1000px; height:900px; float:left;background-color:white">
-                        <div style="width:100px; border:1px solid #000000; border-radius:4px;"><td style="text-align: center;" id="title" runat="server"></td></div>
-                           <div style="width:100px; border:1px solid #000000; border-radius:4px;"><td style="text-align: center;" id="text" runat="server"></td></div>
-                        <div><asp:GridView runat="server"></asp:GridView></div>
-                             <div><asp:TextBox style="width:800px; height:300px;" ID="TextBox3" runat="server" TextMode="MultiLine" ></asp:TextBox></div>
+</div>
+        <div class="b1">
+          
+   <div class="log" style="float: right; width: 262px; height: 45px;"><div class="not-log" style="float: right;" runat="server"> 
+   <asp:Button runat="server" ID="btnLog" OnClick="Unnamed_ServerClick" CssClass="el-button" />
+   </div></div><%--登录--%>
+<div class="div4"> 
+  <div style="width:1000px; height:900px; float:left;">
+                        <div style="border:1px solid #000000; border-radius:4px;" class="auto-style9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <td style="text-align: center;" id="title" runat="server"></td>&nbsp; </div>
+                           <div style="border:1px solid #000000; border-radius:4px;" class="auto-style10"><td style="text-align: center;" id="text" runat="server"></td></div>
+                        <div><asp:GridView runat="server" CssClass="auto-style6" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                            <Columns>
+                                <asp:BoundField DataField="text" HeaderText="text" SortExpression="text" />
+                                <asp:BoundField DataField="provider" HeaderText="provider" SortExpression="provider" />
+                                <asp:BoundField DataField="uploadtime" HeaderText="uploadtime" SortExpression="uploadtime" />
+                            </Columns>
+                            </asp:GridView>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:MyConnectionString %>" ProviderName="<%$ ConnectionStrings:MyConnectionString.ProviderName %>" SelectCommand="SELECT [text], [provider], [uploadtime] FROM [threadinfo]"></asp:SqlDataSource>
+                        </div>
+                             <div><asp:TextBox ID="TextBox3" runat="server" TextMode="MultiLine" CssClass="auto-style8" ></asp:TextBox></div>
                     <div>
-                        <asp:Button ID="Button1" runat="server" Text="评论" OnClick="Button1_Click" OnClientClick="return ShowAlert();" /></div>
+                        <asp:Button ID="Button1" runat="server" Text="评论" OnClick="Button1_Click" OnClientClick="return ShowAlert();" CssClass="auto-style7" Width="99px" /></div>
 
-            </div>
-            </div>
-     </div>
-                   
-       
-        <div style="height:120px;"></div>
+            </div></div>
+    
+     <%--主体--%>
+</div>
 
-        </center>
-           </ContentTemplate>
-           </asp:UpdatePanel>
-    </form>
-       
+        </div>
+
+        </div>
+    </div>
+
+    
+   </div>
+        </form>
 </body>
-    <!-- import Vue before Element -->
-<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
-<!-- import JavaScript -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script>
-    new Vue({
-        el: '#form1',
-        data: function () {
-            return { visible: false }
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+      new Vue({
+          el: '#app',
+          data: function () {
+              return { visible: false }
+          }
+      })
+  </script>
+    <style>
+        .parent {
+display: grid;
+grid-template-columns: repeat(9, 176px);
+grid-template-rows: repeat(11, 82px);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 1 / 3 / 10; }
+.div2 { grid-area: 3 / 1 / 12 / 3; }
+.div3 { grid-area: 3 / 3 / 4 / 10; }
+.div4 { grid-area: 4 / 3 / 12 / 10; }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-    })
-</script>
-<script>
-    document.getElementById('closeButton').addEventListener('click', function () {
-        document.getElementById('failurePopup').style.display = 'none';
-    });
-</script>
-</html>
+        .div2{
+            /* 背景渐变色 - 原理2 */
+    background: linear-gradient(-45deg, #ee7752, #9cebed, #48cbe5, #4ef8d9);
+    /* 背景尺寸 - 原理3 */
+    background-size: 600% 600%;
+    /* 循环动画 - 原理4 */
+    animation: gradientBG 5s ease infinite;
+  }
+
+  /* 动画，控制背景 background-position */
+  @keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+           
+        }
+       .div2 .fati{
+            display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+        }
+       .div3 .log{
+            margin-left: auto;
+        }
+       .div2{
+           width:162px;
+           height:765px;
+       }
+       .b1{
+           height:765px;
+           width:1408px;
+         
+  background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    
+  }
+
+       }
+        .b1 .log {
+            float: right;
+        }
+       
+        .TextBox1{
+             display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+        }
+
+        .auto-style3 {
+            width: auto;
+            height: 260px;
+        }
+        .auto-style6 {
+            margin-left: 621px;
+        }
+        .auto-style7 {
+            margin-left: 665px;
+        }
+        .auto-style8 {
+            width: 800px;
+            height: 300px;
+            margin-left: 315px;
+        }
+        .auto-style9 {
+            width: 309px;
+            margin-left: 567px;
+        }
+        .auto-style10 {
+            width: 313px;
+            height: 38px;
+            margin-left: 565px;
+        }
+
+    </style>

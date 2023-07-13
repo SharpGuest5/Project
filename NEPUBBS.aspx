@@ -81,16 +81,16 @@
                             
                          </tr>
                           <tr>
-                             <td>性别;</td>
+                             <td>性别：</td>
                              <td id="sex" runat="server"></td>
                          </tr>
                          <tr>
-                             <td>年龄;</td>
+                             <td>年龄：</td>
                              <td id="age" runat="server"></td>
                             
                          </tr>
                          <tr>
-                             <td>Emal</td>
+                             <td>Email：</td>
                              <td id="email" runat="server"></td>
                             
                          </tr>

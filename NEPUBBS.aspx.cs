@@ -14,12 +14,9 @@ public partial class _Default : System.Web.UI.Page
     {
         if (Session["Login"] != null)
         {
-            if (Session["Username"] == null)
-            {
                 var errorMessage = (HtmlGenericControl)FindControl("errorMessage");
                 errorMessage.InnerHtml = "您似乎未登录<br />请登录后再发帖";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "showFailurePopup", "document.getElementById('failurePopup').style.display = 'block'; document.getElementById('mask').style.display = 'block';", true);
-            }
         }
         GridView1.RowCommand += GridView1_RowCommand;
         if (!IsPostBack)
